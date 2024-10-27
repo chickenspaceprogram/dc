@@ -1,30 +1,45 @@
+use std::fmt::{Display, Formatter};
+use std::fmt;
+use std::error::Error;
+
 pub trait Arithmetic: Clone {
     /// Adds `num` to the current number
-    fn add<T: Arithmetic>(&mut self, num: T);
+    fn add(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Subtracts `num` from the current number
-    fn subtract<T: Arithmetic>(&mut self, num: T);
+    fn subtract(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Multiplies the current number by `num``.
-    fn multiply<T: Arithmetic>(&mut self, num: T);
+    fn multiply(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Divides the current number by `num``.
-    fn divide<T: Arithmetic>(&mut self, num: T);
+    fn divide(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Returns the current number, modulo `num``.
-    fn modulo<T: Arithmetic>(&mut self, num: T);
+    fn modulo(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Raises the current number to the power `num`.
-    fn pow<T: Arithmetic>(&mut self, num: T);
+    fn pow(&mut self, num: Self) -> Result<(), MathError>;
 
     /// Returns the square root of the number.
-    fn sqrt(&mut self);
+    fn sqrt(&mut self) -> Result<(), MathError>;
 
     /// Negates the number. 
-    fn negate(&mut self);
+    fn negate(&mut self) -> Result<(), MathError>;
 
     fn print(&self);
 }
+
+#[derive(Debug, Clone)]
+pub struct MathError;
+
+impl Display for MathError {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        write!(f, "An arithmetic error occurred.")
+    }
+}
+
+impl Error for MathError{}
 
 /// Can be any valid operator.
 pub enum Operator {

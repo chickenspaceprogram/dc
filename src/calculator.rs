@@ -1,5 +1,6 @@
 use crate::number::{Arithmetic, Token, Control, Operator};
 use std::fmt;
+use std::error::Error;
 
 #[derive(Debug, Clone)]
 pub struct ParseError;
@@ -10,8 +11,10 @@ impl fmt::Display for ParseError {
     }
 }
 
+impl Error for ParseError {}
+
 /// Does the calculations using the operands, control sequences, and numbers in `operations`, and returns whatever was left in the stack.
-pub fn calculator<T: Arithmetic>(operations: Vec<Token<T>>) -> Result<Vec<T>, ParseError> {
+pub fn calculator<T: Arithmetic>(operations: Vec<Token<T>>) -> Result<Vec<T>, Box<dyn Error>> {
     let mut stack: Vec<T> = Vec::new();
     for i in operations {
         match i {
