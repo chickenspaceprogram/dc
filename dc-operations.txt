@@ -7,4 +7,4 @@ Arithmetic Operations:
 % : Modulus
 ^ : Power
 v : sqrt
-_ : Negation (can also negate top num on stack)
+_ : Negation
