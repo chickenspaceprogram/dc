@@ -46,6 +46,7 @@ impl Display for MathError {
 impl Error for MathError{}
 
 /// An enum containing all of the valid operations.
+#[derive(Clone, Debug)]
 pub enum Operator {
     Add,
     Subtract,
@@ -58,6 +59,7 @@ pub enum Operator {
 
 /// An enum defining all the different possible control sequences.
 /// Control sequences do things like clearing the stack, printing numbers on the stack, etc.
+#[derive(Clone, Debug)]
 pub enum Control {
 
     /// Prints the first item on the stack
@@ -80,6 +82,7 @@ pub enum Control {
 }
 
 /// An enum wrapping all the different possible things a token could be.
+#[derive(Clone, Debug)]
 pub enum Token<T: Arithmetic> {
     Op(Operator),
     Num(T),
