@@ -1,6 +1,7 @@
 use std::fmt::{Display, Formatter};
 use std::fmt;
 use std::error::Error;
+pub mod parser;
 
 pub trait Arithmetic: Clone {
     /// Adds `num` to the current number
@@ -23,9 +24,6 @@ pub trait Arithmetic: Clone {
 
     /// Returns the square root of the number.
     fn sqrt(&mut self) -> Result<(), MathError>;
-
-    /// Negates the number. 
-    fn negate(&mut self) -> Result<(), MathError>;
 
     fn print(&self);
 }
@@ -50,7 +48,6 @@ pub enum Operator {
     Mod,
     Pow,
     Sqrt,
-    Negate,
 }
 
 /// Defines all the different possible control sequences.

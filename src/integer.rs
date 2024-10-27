@@ -1,12 +1,12 @@
 use crate::number::{Arithmetic, MathError};
 
 #[derive(Clone)]
-pub struct Integer64 {
-    value: i64,
+pub struct Integer128 {
+    pub value: i128,
 }
 
-impl Arithmetic for Integer64 {
-    fn add(&mut self, num: Integer64) -> Result<(), MathError> {
+impl Arithmetic for Integer128 {
+    fn add(&mut self, num: Integer128) -> Result<(), MathError> {
         match self.value.checked_add(num.value) {
             Some(val) => {
                 self.value = val;
@@ -32,7 +32,10 @@ impl Arithmetic for Integer64 {
                 self.value = val;
                 return Ok(())
             },
-            None => Err(MathError),
+            None => {
+                println!("num1: {}\nnum2: {}", self.value, num.value);
+                return Err(MathError)
+            },
         }
     }
 
@@ -73,12 +76,16 @@ impl Arithmetic for Integer64 {
         return Err(MathError)
     }
 
-    fn negate(&mut self) -> Result<(), MathError> {
-        self.value = -self.value;
-        return Ok(())
-    }
-
     fn print(&self) {
         println!("{}", self.value);
+    }
+}
+
+impl Integer128 {
+    pub fn new(num: i128) -> Integer128 {
+        let int64 = Integer128 {
+            value: num,
+        };
+        return int64
     }
 }
