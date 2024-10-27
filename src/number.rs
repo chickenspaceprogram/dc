@@ -1,7 +1,6 @@
 use std::fmt::{Display, Formatter};
 use std::fmt;
 use std::error::Error;
-pub mod parser;
 
 pub trait Arithmetic: Clone {
     /// Adds `num` to the current number
