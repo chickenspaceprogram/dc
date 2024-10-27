@@ -2,6 +2,8 @@ use std::fmt::{Display, Formatter};
 use std::fmt;
 use std::error::Error;
 
+/// A trait describing all of the methods required by a basic implementation of `dc`.
+/// This is suitably general that it should be possible to make implementations of `dc` for whatever is desired, from emulating TI graphing calculators, to emulating the original Unix `dc`, to even doing matrix math.
 pub trait Arithmetic: Clone {
     /// Adds `num` to the current number
     fn add(&mut self, num: Self) -> Result<(), MathError>;
@@ -24,10 +26,13 @@ pub trait Arithmetic: Clone {
     /// Returns the square root of the number.
     fn sqrt(&mut self) -> Result<(), MathError>;
 
+    /// Prints the number.
     fn print(&self);
 }
 
 #[derive(Debug, Clone)]
+/// An error for when some sort of mathematical error has occurred.
+/// For example, if an overflow occurs, or a specific operation is not permitted (like division by 0).
 pub struct MathError;
 
 impl Display for MathError {
@@ -38,7 +43,7 @@ impl Display for MathError {
 
 impl Error for MathError{}
 
-/// Can be any valid operator.
+/// An enum containing all of the valid operations.
 pub enum Operator {
     Add,
     Subtract,
@@ -49,7 +54,7 @@ pub enum Operator {
     Sqrt,
 }
 
-/// Defines all the different possible control sequences.
+/// An enum defining all the different possible control sequences.
 /// Control sequences do things like clearing the stack, printing numbers on the stack, etc.
 pub enum Control {
 
@@ -72,7 +77,7 @@ pub enum Control {
     Swap,
 }
 
-/// Wraps all the different possible things a token could be into an enum.
+/// An enum wrapping all the different possible things a token could be.
 pub enum Token<T: Arithmetic> {
     Op(Operator),
     Num(T),
