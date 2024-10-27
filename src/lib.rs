@@ -2,7 +2,7 @@ use crate::number::{Arithmetic, Token, Control, Operator};
 use std::fmt;
 use std::error::Error;
 
-mod number;
+pub mod number;
 
 #[derive(Debug, Clone)]
 pub struct ParseError;
