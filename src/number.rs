@@ -1,3 +1,5 @@
+/// Defines traits and enums necessary to create a general number type that `dc` can do math with.
+
 use std::fmt::{Display, Formatter};
 use std::fmt;
 use std::error::Error;

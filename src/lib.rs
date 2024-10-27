@@ -15,7 +15,21 @@ impl fmt::Display for ParseError {
 
 impl Error for ParseError {}
 
-/// Does the calculations using the operands, control sequences, and numbers in `operations`, and returns whatever was left in the stack.
+/// # calculator
+/// 
+/// ### Description:
+/// 
+/// Parses and evaluates the reverse-polish-notation calculations described in `operations`.
+/// 
+/// ### Parameters:
+/// 
+/// `operations` :  A `Vec` containing all of the tokens in the expression `dc` is to parse.
+///                 A `Token` type and associated enums are defined in `number`.
+/// 
+/// `stack` : The stack that `calculator` is to start with. Usually, this can be a new, empty vector.
+/// 
+/// ### Returns:
+/// A `Result` type containing either whatever was left on the stack or some error type.
 pub fn calculator<T: Arithmetic>(operations: Vec<Token<T>>, mut stack: Vec<T>) -> Result<Vec<T>, Box<dyn Error>> {
     for i in operations {
         match i {
